@@ -1,0 +1,13 @@
+@import "@blueprintjs/core/lib/css/blueprint.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.highlight-domain:not(:has(.highlight-domain:hover)):hover {
+  @apply bg-slate-800;
+}
+
+.column-fill-auto {
+  column-fill: auto;
+}
