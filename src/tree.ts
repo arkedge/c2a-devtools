@@ -4,7 +4,7 @@ export type TreeBlueprintNode =
   | { type: "ns"; ns: TreeBlueprintNamespace };
 export const digTreeBlueprintNamespace = (
   ns: TreeBlueprintNamespace,
-  path: string[]
+  path: string[],
 ): TreeBlueprintNamespace => {
   if (path.length === 0) {
     return ns;
@@ -39,7 +39,7 @@ export type TreeNode<T> =
 
 export const buildTree = <T>(
   blueprint: TreeBlueprintNamespace,
-  getValue: (key: string) => T
+  getValue: (key: string) => T,
 ): TreeNamespace<T> => {
   const map = new Map();
   for (const [key, value] of blueprint) {

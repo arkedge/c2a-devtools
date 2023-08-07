@@ -31,7 +31,7 @@ type TelemetryValuePair = {
 
 const buildTelemetryFieldTree = (
   blueprint: TreeBlueprintNamespace,
-  fields: TmivField[]
+  fields: TmivField[],
 ): TreeNamespace<TelemetryValuePair> => {
   const convertedFieldMap = new Map<string, TmivField["value"]>();
   const rawFieldMap = new Map<string, TmivField["value"]>();
@@ -197,10 +197,10 @@ export const TelemetryView: React.FC = () => {
   const telemetryDef = useMemo(() => {
     const [_channel, componentName, telemetryName] = tmivName.split(".");
     const [_c, componentDef] = Object.entries(telemetryComponents).find(
-      ([name, _]) => name === componentName
+      ([name, _]) => name === componentName,
     )!;
     const [_t, telemetryDef] = Object.entries(componentDef.telemetries).find(
-      ([name, _]) => name === telemetryName
+      ([name, _]) => name === telemetryName,
     )!;
     return telemetryDef;
   }, [telemetryComponents, tmivName]);

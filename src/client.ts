@@ -1,7 +1,7 @@
 import type { WorkerResponse, WorkerRpcService } from "./worker";
 
 export const buildClient = <S extends WorkerRpcService>(
-  worker: SharedWorker
+  worker: SharedWorker,
 ): S => {
   const methodFactory = (proc: keyof S) => {
     return (...args: any[]) => {
@@ -13,11 +13,11 @@ export const buildClient = <S extends WorkerRpcService>(
           proc,
           args,
         },
-        [callback]
+        [callback],
       );
       return new Promise((resolve, reject) => {
         const handleResponse = (
-          e: MessageEvent<WorkerResponse<S>[keyof S]>
+          e: MessageEvent<WorkerResponse<S>[keyof S]>,
         ) => {
           channel.port1.removeEventListener("message", handleResponse);
           const response = e.data;
@@ -43,6 +43,6 @@ export const buildClient = <S extends WorkerRpcService>(
         }
         return methodFactory(prop);
       },
-    }
+    },
   ) as S;
 };

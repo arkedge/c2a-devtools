@@ -99,7 +99,7 @@ self.addEventListener("connect", (e) => {
         // eslint-disable-next-line prefer-spread
         const promise = (server[e.data.proc] as any).apply(
           server,
-          e.data.args
+          e.data.args,
         ) as Promise<any>;
         const resolve = (value: any) => {
           if (value instanceof ReadableStream) {
@@ -107,7 +107,7 @@ self.addEventListener("connect", (e) => {
               {
                 value,
               },
-              [value]
+              [value],
             );
           } else {
             e.data.callback.postMessage({
@@ -121,7 +121,7 @@ self.addEventListener("connect", (e) => {
           });
         };
         promise.then(resolve, reject);
-      }
+      },
     );
     port.start();
   }

@@ -94,10 +94,10 @@ export const Layout = () => {
     const items: TelemetryMenuItem[] = [];
     const channelNames = Object.keys(ctx.satelliteSchema.telemetryChannels);
     for (const [componentName, componentSchema] of Object.entries(
-      ctx.satelliteSchema.telemetryComponents
+      ctx.satelliteSchema.telemetryComponents,
     )) {
       for (const [telemetryName, telemetrySchema] of Object.entries(
-        componentSchema.telemetries
+        componentSchema.telemetries,
       )) {
         for (const channelName of channelNames) {
           const name = `${channelName}.${componentName}.${telemetryName}`;

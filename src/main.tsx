@@ -82,5 +82,5 @@ root.render(
     <HelmetProvider>
       <RouterProvider router={router} />
     </HelmetProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

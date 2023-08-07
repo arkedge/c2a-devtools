@@ -87,7 +87,7 @@ const parseCommandLine = (source: string): CommandLine => {
 const buildTco = (
   commandPrefixes: { [key: string]: CommandPrefixSchema },
   commandComponents: { [key: string]: CommandComponentSchema },
-  commandLine: CommandLine
+  commandLine: CommandLine,
 ): Tco => {
   if (!Object.hasOwn(commandPrefixes, commandLine.command.prefix)) {
     throw new Error(`no such command prefix: ${commandLine.command.prefix}`);
@@ -95,7 +95,7 @@ const buildTco = (
   const commandPrefix = commandPrefixes[commandLine.command.prefix];
   if (!Object.hasOwn(commandPrefix.subsystems, commandLine.command.component)) {
     throw new Error(
-      `prefix is not defined for component: ${commandLine.command.component}`
+      `prefix is not defined for component: ${commandLine.command.component}`,
     );
   }
   const commandSubsystem =
@@ -106,7 +106,7 @@ const buildTco = (
   const componentSchema = commandComponents[commandLine.command.component];
   if (!Object.hasOwn(componentSchema.commands, commandLine.command.command)) {
     throw new Error(
-      `no such command in ${commandLine.command.component}: ${commandLine.command.command}`
+      `no such command in ${commandLine.command.component}: ${commandLine.command.command}`,
     );
   }
   const commandSchema = componentSchema.commands[commandLine.command.command];
@@ -116,7 +116,7 @@ const buildTco = (
     commandSchema.parameters.length + extraParams
   ) {
     throw new Error(
-      `the number of parameters is wrong: expected ${commandSchema.parameters.length}, but got ${commandLine.parameters.length}`
+      `the number of parameters is wrong: expected ${commandSchema.parameters.length}, but got ${commandLine.parameters.length}`,
     );
   }
   const tcoParams: TcoParam[] = [];
@@ -264,7 +264,7 @@ export const CommandView: React.FC = () => {
       monaco.editor.setModelMarkers(model, "owner", markers);
       return markers;
     },
-    [commandComponents, commandPrefixes]
+    [commandComponents, commandPrefixes],
   );
 
   const handleEditorDidMount = useCallback(
@@ -321,7 +321,7 @@ export const CommandView: React.FC = () => {
               const tco = buildTco(
                 commandPrefixes,
                 commandComponents,
-                commandLine
+                commandLine,
               );
               await client.postCommand({
                 tco,
@@ -368,14 +368,14 @@ export const CommandView: React.FC = () => {
           const nextPosition = new monaco.Position(lineno + 1, 1);
           editor.setPosition(nextPosition);
           editor.revealLine(lineno + 1);
-        }
+        },
       );
       const model = editor.getModel()!;
       model.onDidChangeContent(() => {
         validate(monacoInstance, editor.getModel()!);
       });
     },
-    [client, commandComponents, commandPrefixes, validate]
+    [client, commandComponents, commandPrefixes, validate],
   );
 
   return (
