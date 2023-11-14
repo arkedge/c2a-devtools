@@ -25,10 +25,13 @@ jobs:
             ${{ runner.os }}-yarn-
 
       - name: install dependencies
+        working-directory: frontend
         run: yarn
 
       - name: lint
+        working-directory: frontend
         run: yarn lint
 
       - name: build
+        working-directory: frontend
         run: yarn build
