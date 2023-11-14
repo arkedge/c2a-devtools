@@ -1,0 +1,6 @@
+{
+  "rust-analyzer.cargo.extraEnv": {
+    "SKIP_FRONTEND_BUILD": "1",
+  },
+  "rust-analyzer.cargo.features": ["bin"],
+}
