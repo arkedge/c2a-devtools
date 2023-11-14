@@ -78,7 +78,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     loader: () => {
-      return redirect(`/${location.port || DEFAULT_TMTC_PORT}`);
+      if (import.meta.env.VITE_PREFER_SELF_PORT) {
+        return redirect(`/${location.port || DEFAULT_TMTC_PORT}`);
+      } else {
+        return redirect(`/${DEFAULT_TMTC_PORT}`);
+      }
     },
   },
   {

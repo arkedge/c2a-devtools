@@ -17,3 +17,4 @@ clap = { version = "4", optional = true, features = ["derive", "env"] }
 [features]
 default = ["bin"]
 bin = ["dep:clap", "dep:tokio", "axum/http1", "axum/tokio"]
+prefer_self_port = []
