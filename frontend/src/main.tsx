@@ -78,7 +78,7 @@ const router = createBrowserRouter([
   {
     path: "/",
     loader: () => {
-      return redirect(`/${DEFAULT_TMTC_PORT}`);
+      return redirect(`/${location.port || DEFAULT_TMTC_PORT}`);
     },
   },
   {
