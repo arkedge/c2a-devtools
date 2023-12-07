@@ -20,7 +20,7 @@
     "fix": "run-s fix:eslint fix:prettier"
   },
   "dependencies": {
-    "@blueprintjs/core": "5.7.1",
+    "@blueprintjs/core": "5.7.2",
     "@blueprintjs/icons": "5.4.1",
     "@monaco-editor/react": "^4.5.0",
     "@protobuf-ts/grpcweb-transport": "^2.8.2",
