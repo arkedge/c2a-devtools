@@ -8,13 +8,13 @@ import {
   redirect,
   useRouteError,
 } from "react-router-dom";
+import * as ComLink from "comlink"
 import { TelemetryView } from "./components/TelemetryView";
 import { Layout } from "./components/Layout";
 import { HelmetProvider } from "react-helmet-async";
 import { Top } from "./components/Top";
 import { Callout, FocusStyleManager, Intent } from "@blueprintjs/core";
 import { CommandView } from "./components/CommandView";
-import { buildClient } from "./client";
 import type { GrpcClientService } from "./worker";
 import { IconNames } from "@blueprintjs/icons";
 import { FriendlyError } from "./error";
@@ -42,7 +42,7 @@ const baseUrlLoader: LoaderFunction = async ({ params }) => {
     /* @vite-ignore */
     name: baseUrl,
   });
-  const client = buildClient<GrpcClientService>(worker);
+  const client = ComLink.wrap<GrpcClientService>(worker.port);
   const { satelliteSchema } = await client.getSatelliteSchema().catch((err) => {
     throw new FriendlyError(`Failed to get satellite schema`, {
       cause: err,
