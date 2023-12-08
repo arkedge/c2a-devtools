@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@blueprintjs/core": "5.7.2",
-    "@blueprintjs/icons": "5.4.1",
+    "@blueprintjs/icons": "5.5.0",
     "@monaco-editor/react": "^4.5.0",
     "@protobuf-ts/grpcweb-transport": "^2.8.2",
     "monaco-editor": "^0.45.0",
