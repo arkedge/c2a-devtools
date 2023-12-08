@@ -1,3 +1,4 @@
+import * as ComLink from "comlink"
 import { GrpcWebFetchTransport } from "@protobuf-ts/grpcweb-transport";
 import {
   PostCommandRequest,
@@ -17,29 +18,6 @@ export type GrpcClientService = {
   getSatelliteSchema(): Promise<GetSateliteSchemaResponse>;
   postCommand(input: PostCommandRequest): Promise<PostCommandResponse>;
   openTelemetryStream(tmivName: string): Promise<ReadableStream<Tmiv>>;
-};
-
-export type WorkerRpcService = {
-  [proc: string]: (...args: any) => Promise<any>;
-};
-
-type Values<T> = T[keyof T];
-
-export type WorkerRequest<S extends WorkerRpcService> = Values<{
-  [Proc in keyof S]: {
-    callback: MessagePort;
-    proc: Proc;
-    args: Parameters<S[Proc]>;
-  };
-}>;
-export type WorkerResponse<S extends WorkerRpcService> = {
-  [Proc in keyof S]:
-    | {
-        value: Awaited<ReturnType<S[Proc]>>;
-      }
-    | {
-        error: string;
-      };
 };
 
 const transport = new GrpcWebFetchTransport({
@@ -73,7 +51,7 @@ const server = {
   },
   async openTelemetryStream(tmivName: string): Promise<ReadableStream<Tmiv>> {
     let handler: any;
-    return new ReadableStream({
+    const stream = new ReadableStream({
       start(controller) {
         handler = (e: CustomEvent<Tmiv>) => {
           controller.enqueue(e.detail);
@@ -88,44 +66,17 @@ const server = {
         telemetryBus.removeEventListener(tmivName, handler as any);
       },
     });
+
+    return ComLink.transfer(stream, [stream])
   },
 };
 
 self.addEventListener("connect", (e) => {
   for (const port of e.ports) {
-    port.addEventListener(
-      "message",
-      (e: MessageEvent<WorkerRequest<GrpcClientService>>) => {
-        // eslint-disable-next-line prefer-spread
-        const promise = (server[e.data.proc] as any).apply(
-          server,
-          e.data.args,
-        ) as Promise<any>;
-        const resolve = (value: any) => {
-          if (value instanceof ReadableStream) {
-            e.data.callback.postMessage(
-              {
-                value,
-              },
-              [value],
-            );
-          } else {
-            e.data.callback.postMessage({
-              value,
-            });
-          }
-        };
-        const reject = (error: any) => {
-          e.data.callback.postMessage({
-            error,
-          });
-        };
-        promise.then(resolve, reject);
-      },
-    );
-    port.start();
+    ComLink.expose(server, port)
   }
 });
+
 (async () => {
   // eslint-disable-next-line no-constant-condition
   while (true) {
