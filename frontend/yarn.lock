@@ -2481,10 +2481,10 @@ react-refresh@^0.14.0:
   resolved "https://registry.yarnpkg.com/react-refresh/-/react-refresh-0.14.0.tgz#4e02825378a5f227079554d4284889354e5f553e"
   integrity sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==
 
-react-resizable-panels@^0.0.63:
-  version "0.0.63"
-  resolved "https://registry.yarnpkg.com/react-resizable-panels/-/react-resizable-panels-0.0.63.tgz#d364d84ee5927bfb0e56c7ea75eb6504e9041a21"
-  integrity sha512-AfA8b6kouhL4rBvgUGs17uzWVlYPaJIwwTCVeWRxNpUHJlCG1h9RIMlzA1849AZGsaNJO3j/SNdI5SS4GZDE3g==
+react-resizable-panels@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-resizable-panels/-/react-resizable-panels-1.0.0.tgz#ca7ff65d4d871f6e18e400e1b92bd1389f42d5bc"
+  integrity sha512-ms9GMs0qV7LSX5TR511h1K5Ax+YYZQ2HMctqaWnsdnGgteJoKP1baA//v2XbicGo9xbuK0cw/8qFXS6e6xl8Ew==
 
 react-router-dom@^6.10.0:
   version "6.20.1"
