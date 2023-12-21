@@ -7,7 +7,7 @@ exclude = ["frontend/dist", "frontend/node_modules"]
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-axum = { version = "0.6", default-features = false }
+axum = { version = "0.7", default-features = false }
 rust-embed = "8.1.0"
 mime_guess = "2.0.4"
 
