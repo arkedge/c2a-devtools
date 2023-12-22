@@ -1,5 +1,9 @@
 # C2A DevTools
 
+## ⚠️ THIS REPOSITORY HAVE BEEN ARCHIVED ⚠️
+
+C2A DevTools は [Gaia](https://github.com/arkedge/gaia) に統合されました。
+
 ## How to use
 
 ### Prerequisites
